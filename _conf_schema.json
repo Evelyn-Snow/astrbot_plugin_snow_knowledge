@@ -1,0 +1,63 @@
+{
+  "enabled": {
+    "description": "启用知识库",
+    "type": "bool",
+    "default": true
+  },
+  "min_retrieve_interval_seconds": {
+    "description": "同会话检索最小间隔（秒）",
+    "type": "int",
+    "default": 45,
+    "hint": "该时间内同一会话复用上次检索结果，不再调用 embedding（每次 embedding 约 300ms，是主要延迟来源）；设 0 = 每轮都检索"
+  },
+  "index_dir": {
+    "description": "知识库目录",
+    "type": "string",
+    "default": "",
+    "hint": "留空 = 插件数据目录 knowledge/；可填任意绝对路径"
+  },
+  "max_chunks_per_event": {
+    "description": "单次经历最多入库片段数",
+    "type": "int",
+    "default": 20,
+    "hint": "防止一次读一大段就灌爆索引；超出的部分丢弃"
+  },
+  "chunk_size": {
+    "description": "片段长度（字）",
+    "type": "int",
+    "default": 500
+  },
+  "chunk_overlap": {
+    "description": "片段重叠（字）",
+    "type": "int",
+    "default": 80,
+    "hint": "相邻片段的重叠字数，避免关键句被切开丢失上下文"
+  },
+  "retrieve_top_k": {
+    "description": "每轮检索片段数",
+    "type": "int",
+    "default": 3
+  },
+  "similarity_threshold": {
+    "description": "相似度阈值",
+    "type": "float",
+    "default": 0.5,
+    "hint": "低于该余弦相似度的片段不注入（0-1，越高越严格）"
+  },
+  "inject_limit_chars": {
+    "description": "注入知识的最大字数",
+    "type": "int",
+    "default": 600
+  },
+  "reinject_cooldown_minutes": {
+    "description": "同批片段重复注入冷却",
+    "type": "int",
+    "default": 30
+  },
+  "tool_enabled": {
+    "description": "提供 recall_knowledge 工具",
+    "type": "bool",
+    "default": true,
+    "hint": "让她在需要时主动检索知识库"
+  }
+}
